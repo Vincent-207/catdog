@@ -11,7 +11,9 @@ public class PhysicsButton : MonoBehaviour
     SpringJoint2D springJoint2D;
     [SerializeField]
     Rigidbody2D myRigidbody2D;
-    bool wasPressed;
+    bool wasPressed = false;
+
+    [SerializeField] float pressThreshold;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,15 +23,37 @@ public class PhysicsButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if pressed
-        // invoke j
+        handleInputs();
+    }
+    void handleInputs()
+    {
+        if(sliderJoint2D.jointTranslation <= pressThreshold)
+        {
+                Debug.Log("PRESSED");
+            buttonPressed.Invoke();
+            if(!wasPressed)
+            {
+                buttonJustPressed.Invoke();
+                Debug.Log("JUST PRESSED");
+            }
+
+            wasPressed = true;
+        }
+        else
+        {
+            buttonReleased.Invoke();
+
+            if(wasPressed)
+            {
+                buttonJustReleased.Invoke();
+            }
+
+            wasPressed = false;
+        }
+        
     }
 
-    void handleInput()
+    void OnDrawGizmos()
     {
-        // if is currently pressed
-            // invoke buttonPressde
-            // if was pressed == false
-                // invoke buttonJustPressed
     }
 }

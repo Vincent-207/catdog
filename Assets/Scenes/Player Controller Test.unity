@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 512353419}
   - component: {fileID: 512353421}
   - component: {fileID: 512353420}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -615,7 +615,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 229e3f346222f714eb490b57746c10bb, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -641,6 +641,11 @@ MonoBehaviour:
   moveAction: {fileID: -1680190386980627800, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   jumpAction: {fileID: -2099379676528639254, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   moveSpeed: 1000
+  jumpForce: 5
+  groundCheckDistance: 1.1
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!70 &1309842830
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

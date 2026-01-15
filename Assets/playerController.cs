@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -10,6 +11,47 @@ public class playerController : MonoBehaviour
     Rigidbody2D rb;
     [SerializeField]
     float moveSpeed;
+    [Header("Jump settings")]
+    [SerializeField]
+    float jumpForce;
+    [SerializeField]
+    float groundCheckDistance;
+    [SerializeField]
+    LayerMask groundLayerMask;
+    void OnEnable()
+    {
+        jumpAction.action.started += TryJump;
+    }
+
+    void OnDisable()
+    {
+        jumpAction.action.started -= TryJump;
+    }
+    bool IsGrounded()
+    {
+        RaycastHit2D raycastHit2D = Physics2D.Raycast(transform.position, -transform.up, groundCheckDistance, groundLayerMask);
+        
+        if(raycastHit2D.collider == null)
+        {
+            Debug.Log("not Grouneded");
+            return false;
+        }
+        Debug.Log("Grouneded");
+        return true;
+
+    }
+    void TryJump(InputAction.CallbackContext obj)
+    {
+        Debug.Log("Trying jump!");
+        if(IsGrounded())
+        {
+            Jump();
+        }
+    }
+    void Jump()
+    {
+        rb.AddForce(jumpForce * transform.up, ForceMode2D.Impulse);
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -25,5 +67,6 @@ public class playerController : MonoBehaviour
         // TODO clamp to max speed
         // TODO change based on 
         
+        Debug.DrawRay(transform.position, -transform.up * groundCheckDistance, Color.red);
     }
 }

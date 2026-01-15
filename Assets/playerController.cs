@@ -33,16 +33,16 @@ public class playerController : MonoBehaviour
         
         if(raycastHit2D.collider == null)
         {
-            Debug.Log("not Grouneded");
+            // Debug.Log("not Grouneded");
             return false;
         }
-        Debug.Log("Grouneded");
+        // Debug.Log("Grouneded");
         return true;
 
     }
     void TryJump(InputAction.CallbackContext obj)
     {
-        Debug.Log("Trying jump!");
+        // Debug.Log("Trying jump!");
         if(IsGrounded())
         {
             Jump();
